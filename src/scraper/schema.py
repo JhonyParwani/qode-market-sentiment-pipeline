@@ -49,8 +49,11 @@ class RawTweet:
 
     def to_dict(self) -> dict:
         d = asdict(self)
+<<<<<<< HEAD
         d["timestamp"] = self.timestamp.isoformat()
         d["scraped_at"] = self.scraped_at.isoformat()
+=======
+>>>>>>> origin/main
         d["hashtags"] = list(self.hashtags)
         d["mentions"] = list(self.mentions)
         d["scrape_date"] = self.scrape_date

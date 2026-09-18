@@ -39,6 +39,7 @@ def _run_single_query(query: str, tag: str, target: int) -> List[RawTweet]:
     return results
 
 
+<<<<<<< HEAD
 def run_concurrent_scrape(max_workers: int = 3, batch_flush_size: int = 200) -> dict:
     """Returns {tag: tweets_collected} so a shortfall against
     tweets_per_hashtag is visible per-tag rather than only as a total."""
@@ -61,6 +62,28 @@ def run_concurrent_scrape(max_workers: int = 3, batch_flush_size: int = 200) -> 
     total_written = sum(results_per_tag.values())
     logger.info(f"Concurrent scrape complete: {total_written} tweets written across {len(results_per_tag)} tags.")
     return results_per_tag
+=======
+def run_concurrent_scrape(max_workers: int = 3, batch_flush_size: int = 200) -> int:
+    store = ParquetStore()
+    per_query_target = max(
+        1, SCRAPER.target_tweet_count // (len(SCRAPER.hashtags) + len(SCRAPER.cashtags))
+    )
+    jobs = [(f"%23{tag}", tag, per_query_target) for tag in SCRAPER.hashtags]
+    jobs += [(f"%24{tag}", tag, per_query_target) for tag in SCRAPER.cashtags]
+
+    total_written = 0
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        futures = {executor.submit(_run_single_query, q, t, n): t for q, t, n in jobs}
+        for future in as_completed(futures):
+            tag = futures[future]
+            tweets = future.result()
+            logger.info(f"Worker for '{tag}' collected {len(tweets)} tweets.")
+            for i in range(0, len(tweets), batch_flush_size):
+                total_written += store.write_batch(tweets[i:i + batch_flush_size])
+
+    logger.info(f"Concurrent scrape complete: {total_written} tweets written.")
+    return total_written
+>>>>>>> origin/main
 
 
 if __name__ == "__main__":

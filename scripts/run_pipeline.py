@@ -20,7 +20,10 @@ from src.signals.signal_generator import build_symbol_timeseries
 from src.visualization.streaming_plots import (
     plot_sentiment_scatter_sampled, plot_composite_signal, plot_top_terms,
 )
+<<<<<<< HEAD
 from scripts.generate_evaluation_report import build_per_hashtag_report, render_markdown
+=======
+>>>>>>> origin/main
 from src.utils.config import DATA_PROCESSED, DATA_SAMPLE
 from src.utils.logger import get_logger
 
@@ -67,6 +70,7 @@ def main():
         plot_composite_signal(signal_ts, DATA_SAMPLE / "composite_signal.png")
     plot_top_terms(top_terms, DATA_SAMPLE / "top_terms.png")
 
+<<<<<<< HEAD
     # Per-hashtag evaluation — target vs. actual, sentiment/engagement shape
     # per tag. This is the client's explicit "evaluate the collected data"
     # ask, so it runs as part of the standard pipeline, not as an afterthought.
@@ -78,6 +82,9 @@ def main():
 
     _print_summary(scored, signal_ts, top_terms)
     print(eval_md)
+=======
+    _print_summary(scored, signal_ts, top_terms)
+>>>>>>> origin/main
     logger.info("=== Pipeline complete ===")
 
 

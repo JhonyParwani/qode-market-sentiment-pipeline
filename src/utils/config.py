@@ -23,6 +23,7 @@ class ScraperConfig:
     # retail-trader) slice of the conversation than the hashtags alone.
     hashtags: list = field(default_factory=lambda: [
         "nifty50", "sensex", "intraday", "banknifty",
+<<<<<<< HEAD
 "stockmarketindia", "niftytrading",
     ])
     cashtags: list = field(default_factory=lambda: ["NIFTY", "BANKNIFTY", "SENSEX"])
@@ -52,6 +53,23 @@ class ScraperConfig:
     session_cooldown_sec: int = 90       # forced pause every N scrolls
     scrolls_before_cooldown: int = 40
     stall_scroll_limit: int = 25         # abort a query if this many scrolls pass with zero new tweets
+=======
+        "stockmarketindia", "niftytrading",
+    ])
+    cashtags: list = field(default_factory=lambda: ["NIFTY", "BANKNIFTY", "SENSEX"])
+
+    target_tweet_count: int = 2000
+    lookback_hours: int = 24
+
+    # Selenium tends to get flagged fast on X if you hammer it. These knobs
+    # exist specifically to be tuned down under a stricter proxy or up on a
+    # residential IP with a warmed-up account.
+    scroll_pause_min_sec: float = 2.5
+    scroll_pause_max_sec: float = 5.5
+    max_scrolls_per_session: int = 400
+    session_cooldown_sec: int = 90       # forced pause every N scrolls
+    scrolls_before_cooldown: int = 40
+>>>>>>> origin/main
     headless: bool = True
     page_load_timeout_sec: int = 30
 
