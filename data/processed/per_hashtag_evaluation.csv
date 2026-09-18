@@ -1,0 +1,8 @@
+hashtag,target,raw_collected,pct_of_target,after_clean_dedup,removed_clean_dedup,pct_removed,avg_engagement,pct_bullish,pct_bearish,pct_neutral,pct_devanagari_or_mixed
+NIFTY,500,9,1.8,9,0,0.0,0.0,11.1,22.2,66.7,0.0
+banknifty,2000,568,28.4,361,207,36.4,19.9,25.8,22.2,52.1,0.6
+intraday,2000,465,23.2,256,209,44.9,27.0,32.4,23.4,44.1,0.0
+nifty50,2000,933,46.6,680,253,27.1,9.5,18.8,13.1,68.1,0.4
+niftytrading,2000,409,20.4,215,194,47.4,25.0,28.4,28.8,42.8,0.0
+sensex,2000,687,34.4,482,205,29.8,12.6,23.9,18.3,57.9,2.7
+stockmarketindia,2000,664,33.2,354,310,46.7,17.8,28.8,20.6,50.6,0.8

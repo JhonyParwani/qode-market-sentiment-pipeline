@@ -1,0 +1,10 @@
+selenium==4.23.1
+pandas==2.2.2
+pyarrow==17.0.0
+numpy==1.26.4
+scikit-learn==1.5.1
+scipy==1.13.1
+datasketch==1.6.5
+emoji==2.12.1
+matplotlib==3.9.1
+pytest==8.3.2
