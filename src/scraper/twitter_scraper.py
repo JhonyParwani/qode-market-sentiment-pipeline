@@ -35,13 +35,9 @@ from src.scraper.rate_limiter import RateLimiter
 from src.scraper.schema import RawTweet
 from src.utils.config import SCRAPER
 from src.utils.logger import get_logger
-<<<<<<< HEAD
 from dotenv import load_dotenv
 
 load_dotenv()
-=======
-
->>>>>>> origin/main
 logger = get_logger(__name__, log_file="scraper.log")
 
 SEARCH_URL = "https://x.com/search?q={query}&f=live"
@@ -203,55 +199,39 @@ class TwitterScraper:
             logger.warning(f"No results loaded for query '{query}' — skipping.")
             return
 
-<<<<<<< HEAD
         scrolls_since_new_tweet = 0
 
-=======
->>>>>>> origin/main
         while collected < max_tweets and self.limiter.should_continue():
             if self._detect_soft_block():
                 should_retry = self.limiter.register_soft_block()
                 if not should_retry:
-<<<<<<< HEAD
                     logger.error(
                         f"Too many consecutive soft blocks on '{query}' — ending session with "
                         f"{collected}/{max_tweets} collected. This is expected behavior, not a bug: "
                         "see docs/APPROACH.md on honest shortfall reporting."
                     )
-=======
-                    logger.error("Too many consecutive soft blocks — ending session.")
->>>>>>> origin/main
                     return
                 continue
 
             cards = self.driver.find_elements(By.XPATH, "//article")
-<<<<<<< HEAD
             found_new_this_pass = False
-=======
->>>>>>> origin/main
             for card in cards:
                 tweet = self._parse_tweet_card(card, primary_hashtag)
                 if tweet is None:
                     continue
                 if tweet.timestamp < cutoff:
-<<<<<<< HEAD
                     logger.info(
                         f"Reached {self.config.lookback_hours}h lookback boundary for '{query}' "
                         f"at {collected}/{max_tweets} tweets."
                     )
                     return
                 found_new_this_pass = True
-=======
-                    logger.info(f"Reached {self.config.lookback_hours}h lookback boundary for '{query}'.")
-                    return
->>>>>>> origin/main
                 collected += 1
                 self.limiter.register_success()
                 yield tweet
                 if collected >= max_tweets:
                     return
 
-<<<<<<< HEAD
             # X's search timeline reshuffles/re-renders already-seen tweets once
             # you've scrolled past everything genuinely new for a hashtag —
             # without this check the loop would burn scrolls forever on a
@@ -267,14 +247,11 @@ class TwitterScraper:
                 )
                 return
 
-=======
->>>>>>> origin/main
             self.driver.execute_script("window.scrollBy(0, window.innerHeight * 2.5);")
             self.limiter.register_scroll()
             self.limiter.human_pause()
 
     def scrape_all(self) -> Iterator[RawTweet]:
-<<<<<<< HEAD
         """
         Required hashtags (from the client's brief) each get the full
         `tweets_per_hashtag` target. Cashtags are bonus coverage, scraped at
@@ -291,17 +268,6 @@ class TwitterScraper:
                 collected_for_tag += 1
                 yield tweet
             logger.info(f"Finished '{tag}': {collected_for_tag}/{target} tweets collected.")
-=======
-        per_query_target = max(
-            1, self.config.target_tweet_count // (len(self.config.hashtags) + len(self.config.cashtags))
-        )
-        queries = [(f"%23{tag}", tag) for tag in self.config.hashtags]
-        queries += [(f"%24{tag}", tag) for tag in self.config.cashtags]
-
-        for query, tag in queries:
-            logger.info(f"Scraping '{tag}' (target {per_query_target} tweets)...")
-            yield from self.scrape_query(query, tag, per_query_target)
->>>>>>> origin/main
 
 
 if __name__ == "__main__":

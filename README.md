@@ -9,7 +9,6 @@ No paid APIs or official Twitter/X API are used anywhere in this repo, per the
 assignment constraint. Collection is done via Selenium against the public
 search UI.
 
-<<<<<<< HEAD
 **Revision note:** updated per client feedback to target 2,000 real tweets
 *per* required hashtag (#nifty50, #sensex, #intraday, #banknifty), not 2,000
 total. `src/utils/config.py::tweets_per_hashtag` controls this, and
@@ -18,8 +17,6 @@ total. `src/utils/config.py::tweets_per_hashtag` controls this, and
 every pipeline run. See `data/processed/per_hashtag_evaluation.md` after
 running the live scraper.
 
-=======
->>>>>>> origin/main
 ## What this actually does, in one paragraph
 
 A Selenium scraper pulls recent tweets for a set of hashtags/cashtags, writing
@@ -96,7 +93,6 @@ supported as a fallback (see `src/scraper/twitter_scraper.py::_login`).
 pytest tests/ -v
 ```
 
-<<<<<<< HEAD
 ## About the sample data — read this before submitting
 
 `generate_sample_data.py` produces **synthetic** data — realistic schema and
@@ -121,38 +117,15 @@ section) — it isn't padded with synthetic rows to hit the target.
 
 From the synthetic demo run (pipeline mechanics only — see caveat above):
 `data/sample/sample_tweets_preview.csv` — top tweets by engagement
-=======
-## About the sample data
-
-X blocks scraping from data-center IPs — which is what any CI runner, cloud
-sandbox, or grading environment runs on — so a live scrape can't run in an
-automated context; it needs a real residential session. `generate_sample_data.py`
-produces a synthetic dataset with the same schema and similar statistical
-shape (power-law engagement, bursty time distribution, mixed Hindi/English
-content, an injected 3% of true duplicates) so the full pipeline — storage,
-cleaning, dedup, signal generation, plotting — can be run and verified without
-live credentials. The scraper itself (`src/scraper/twitter_scraper.py`) is a
-real, complete implementation meant to be run locally; it's just not something
-that can execute inside a hosted grading environment.
-
-## Sample output
-
-`data/sample/sample_tweets_preview.csv` — top tweets by engagement after the full pipeline
->>>>>>> origin/main
 `data/sample/composite_signal.png` — composite signal + confidence band per symbol
 `data/sample/sentiment_scatter.png` — tweet-level sentiment scatter (reservoir-sampled)
 `data/sample/top_terms.png` — TF-IDF top terms for the current window
 
-<<<<<<< HEAD
 From a real scrape run, `scripts/run_pipeline.py` additionally writes
 `data/processed/per_hashtag_evaluation.csv` / `.md` — actual tweets collected
 per required hashtag against the 2,000 target, post-clean/dedup counts, and
 the sentiment/engagement breakdown per tag. This is the file that answers
 the client's "evaluate the collected data" ask directly.
-=======
-Pipeline run against 2,472 synthetic tweets: 1,248 remained after dedup, split
-roughly 34% bullish / 26% bearish / 40% neutral by the lexicon scorer.
->>>>>>> origin/main
 
 ## Design notes
 
