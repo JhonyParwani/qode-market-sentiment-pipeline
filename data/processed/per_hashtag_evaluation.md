@@ -2,7 +2,9 @@
 
 Target: **2000 real tweets per required hashtag** (last 24h). Required tags: nifty50, sensex, intraday, banknifty, stockmarketindia, niftytrading.
 
-**Overall: 3735 / 12500 tweets collected (29.9% of combined target).**
+**Overall required-tag result: 3726 / 12000 tweets collected (31.1% of combined target).**
+
+> Additional bonus data: 9 tweets were collected for `#NIFTY`.
 
 | Hashtag | Target | Collected | % of target | After clean+dedup | Bullish % | Bearish % | Neutral % | Avg engagement |
 |---|---|---|---|---|---|---|---|---|
